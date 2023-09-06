@@ -18,6 +18,7 @@ router.post('/', function (req, res){
 })
 
 function checkPalindrome(phrase){
+  phrase = phrase.replace("!", '');
   let temp = phrase.split("");
   temp = temp.reverse();
   temp = temp.join("");
