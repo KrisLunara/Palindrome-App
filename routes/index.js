@@ -18,11 +18,19 @@ router.post('/', function (req, res){
 })
 
 function checkPalindrome(phrase){
-  phrase = phrase.replace("!", '');
+  phrase = phrase
+      .replaceAll("!", '')
+      .replaceAll("?", '')
+      .replaceAll(".", '')
+      .replaceAll(",", '')
+      .replaceAll(":", '')
+      .replaceAll(";", '')
+      .replaceAll("'", '')
+      .replaceAll(`"`, '');
   let temp = phrase.split("");
   temp = temp.reverse();
   temp = temp.join("");
-  if (phrase.toLowerCase().replace(" ", "") === temp.toLowerCase().replace(" ", "") ){
+  if (phrase.toLowerCase().replaceAll(" ", "") === temp.toLowerCase().replaceAll(" ", "") ){
     return true
   }
   else{
@@ -31,8 +39,21 @@ function checkPalindrome(phrase){
 }
 
 function getResultDescription (phrase){
+  let CleanPhrase = phrase.toLowerCase()
+      .replaceAll("!", '')
+      .replaceAll("?", '')
+      .replaceAll(".", '')
+      .replaceAll(",", '')
+      .replaceAll(":", '')
+      .replaceAll(";", '')
+      .replaceAll("'", '')
+      .replaceAll(`"`, '')
+      .replaceAll(" ", "");
+  let temp = CleanPhrase.split("");
+  temp = temp.reverse();
+  temp = temp.join("");
   if (checkPalindrome(phrase)){
-    return `${phrase} is a palindrome.`
+    return `${phrase} is a palindrome. Reversed: ${temp}`
   }
-  return `${phrase} is not a palindrome.`
+  return `${phrase} is not a palindrome. Reversed: ${temp}`
 }
